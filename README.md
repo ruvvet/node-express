@@ -1,6 +1,13 @@
 # node-express
 
-# Notes:
+### creating repo + initializing node in the project
+1. create repo/folder
+2. navigate to folder in terminal
+3. `npm init`
+4. ... adjust settings - entry point is the file you use as the entry point
+5. ... 
+
+### Notes:
 
 ```javascript
 
