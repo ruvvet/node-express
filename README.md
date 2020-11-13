@@ -78,5 +78,90 @@ for (let i=0; i<foods.length; i++){
 To ignore the module files, create a .gitignore file and add `node_modules` into the file.
 
 
+# SQL NOTES
+
+## Basics
+
+select all
+
+ ```SQL
+SELECT * FROM tablename;
+```
+
+Select given specific parameters
+
+```SQL
+ SELECT field FROM tablename
+    WHERE field = 'somevalue';
+    ...
+    WHERE field IN ('value1', 'val2'...);
+    ...
+    WHERE field BETWEEN ...AND/OR...;
+    ...
+```
+
+order by
+```SQL
+SELECT field FROM tablename
+    WHERE ...
+    ORDER BY... field
+```
+
+## Operations
+
+greater/less than
+```SQL
+SELECT field FROM tablename
+    WHERE field2 >/</>=/<=/= somevalue;
+```
+
+can calculate new fields with matches
+```SQL
+SELECT field, math() FROM tablename
+    WHERE....
+```
+
+
+
+
+## Strings
+
+Select w/ wildcards
+- % is a wildcard that can be any length
+- _ (underscore) is one char slot
+- use (str)% to find wildcards that start with the str
+- %(str) that end with the str
+- %(str)% contains the str
+- (str start)%(str end) that returns any matches that start + end
+- '%a%a%a%' finding any matches with 3 a's
+- '_t%' where t is the second char in the string
+
+
+```SQL
+SELECT field FROM tablename
+    WHERE field LIKE '%str';
+    ...
+    WHERE field LIKE 'str%';
+    ...
+    WHERE field LIKE '%str%';
+    ...
+    WHERE field LIKE 'strA%strB';
+    ...
+```
+
+Length of a value/string
+
+```SQL
+SELECT * FROM tablename
+    WHERE LENGTH(field) = ;
+```
+
+Concatenate strings
+
+```SQL
+SELECT field FROM tablename
+    WHERE field2 = concat(field, ' something')
+```
+
 
 
