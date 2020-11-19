@@ -94,3 +94,18 @@ Rendering it in html. The ejs engine `app.set('view engine', 'ejs');` converts t
 <!-- makes an ejs page accessible -->
 <%- include('nav') %>
 ```
+
+
+### Routes
+
+Should start with a `'/'` because this directing to a url path.
+Use this for:
+ - any `app.get ('/', ...)`, `app.post`, `app.put`, `app.delete`
+ - `res.redirects('/')`
+ - form action `'/'`
+
+
+### Renders
+
+This is rendering a page in the project, and not a url.
+res.render will auto search in the 'views' folder and do not need a `'/'`.
