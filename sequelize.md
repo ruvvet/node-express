@@ -1,16 +1,67 @@
 # SEQUELIZE
 
 ## Set up
-1. `npm install pg sequelize`
-2. `sequelize init` to set up all the sequelize files
-3. set up the `config/config.json` file as needed
-4. `sequelize db: create [dbname]` create the db
-5. `sequelize model:create --name user --attributes firstName:string,lastName:string`
+1. `npm install pg` for postgres
+2. `npm i sequelize`
+3. `sequelize init` to set up all the sequelize files
+4. set up the `config/config.json` file as needed *** IMPORTANT
+5. `createdb -U postgres [dbname]` create the db w/ a specific user
+6. create the model `sequelize model:create --name user --attributes firstName:string,lastName:string`
 
 set up the table + the fields. table name should be singular as it will auto become plural. Note that the model file name will still be singular and that should be used to retrieve in js.
 
 6. `sequelize db:migrate` migrate to connect and update the models to the db
 
+
+## Configuring the models further inside the models file
+We can further configure the models inside the models file
+This is essentially an extended class with constructors/functions
+Except we don't need to call `this.` for each
+
+### Configuring 1:M, M:N associations
+Inside `static associate(models){...}`
+ - 1:M
+```javascript
+models.fileOrModelName.hasMany(models.fileOrModelName222);
+models.fileOrModelName222.belongsTo(models.fileOrModelName);
+```
+- M:N
+- create a table like `sequelize model:create --name petsToys --attributes petId:integer,toyId:integer` that basiaclly takes both and makes a new 3rd table
+```javascript
+models.fileOrModelName.belongsToMany(models.fileOrModelName222, {through: "comboedmodel"})
+models.fileOrModelName222.belongsToMany(models.fileOrModelName, {through: "comboedmodel"})
+```
+
+### Configuring model datatypes for each field
+Configure more specific restrictions on datatypes
+- configure whether to allow/notallow null datatypes:
+```javascript
+title: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    }
+```
+- isdate/isurl...etc
+```javascript
+    date: {
+      type: DataTypes.DATE,
+      validate: { isDate: true }
+    },
+    url: {
+      type: DataTypes.TEXT,
+      validate: { isUrl: true }
+    }
+```
+- more here [https://sequelize.org/master/manual/validations-and-constraints.html](https://sequelize.org/master/manual/validations-and-constraints.html)
+
+### Functions that can be called on data from the model
+- functions can also be added here and called inside the "class"
+```javascript
+//ex
+function getFullName (){
+  return this.firstName + " " + this.lastName;
+}
+```
 ## Queries
 
 - Remember that any call on a db is a promise, and any executables need to be made inside the .then
@@ -96,6 +147,20 @@ dbname.tablename
   });
 
 ```
+
+
+
+
+ - [ ] put notes in here from usreapp
+
+
+
+
+
+
+
+
+
 
 
 
